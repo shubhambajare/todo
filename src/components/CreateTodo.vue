@@ -4,7 +4,7 @@
             <el-col :span="6">
                 <el-input v-model="title" placeholder="Title" />
             </el-col>
-            <el-col :span="16">
+            <el-col :span="10">
                 <el-input v-model="description" placeholder="Description" />
             </el-col>
             <el-col :span="1">
