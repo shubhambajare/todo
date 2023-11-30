@@ -1,16 +1,23 @@
 <template>
     <div style="margin: 10px 20px">
-        <el-row :gutter="10">
-            <el-col :span="6">
+
+        <el-dialog :model-value="true" title="Create Todo" width="50%" @closed="close">
+            <div>
+                <h3>Title<span style="color: red;">*</span></h3>
                 <el-input v-model="title" placeholder="Title" />
-            </el-col>
-            <el-col :span="10">
-                <el-input v-model="description" placeholder="Description" />
-            </el-col>
-            <el-col :span="1">
-                <el-button type="primary" @click="addTodo">Create</el-button>
-            </el-col>
-        </el-row>
+                <br />
+                <h3>Description<span style="color: red;">*</span></h3>
+                <el-input v-model="description" type="textarea" placeholder="Description" />
+            </div>
+            <template #footer>
+                <span class="dialog-footer">
+                    <el-button @click="close">Cancel</el-button>
+                    <el-button type="primary" @click="addTodo">
+                        Create
+                    </el-button>
+                </span>
+            </template>
+        </el-dialog>
     </div>
 </template>
     
@@ -18,7 +25,7 @@
 import { ElMessage } from 'element-plus';
 import { ref } from 'vue';
 
-const emits = defineEmits(['add-todo']);
+const emits = defineEmits(['add-todo', 'close']);
 
 const title = ref('');
 const description = ref('');
@@ -35,6 +42,11 @@ const addTodo = () => {
 
     emits('add-todo', { title, description });
 }
+
+const close = () => {
+    emits('close');
+}
+
 </script>
     
 <style scoped></style>

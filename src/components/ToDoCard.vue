@@ -10,12 +10,12 @@
         </el-col>
         <el-col :span="2" style="text-align: center;">
           <el-icon :size="20" @click="() => toggleImp(todo.title)">
-            <StarFilled v-if="todo.isImp" />
+            <StarFilled v-if="todo.isImp" color="#e6a23c" />
             <Star v-else />
           </el-icon>
         </el-col>
         <el-col :span="2" style="text-align: center;">
-          <el-button type="warning" :icon="Delete" circle @click="() => deleteTodo(todo)" />
+          <el-button type="primary" :icon="Delete" circle @click="() => deleteTodo(todo)" />
         </el-col>
       </el-row>
     </el-card>
