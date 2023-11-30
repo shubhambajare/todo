@@ -1,13 +1,13 @@
 <template>
   <el-row style="align-items: center; margin: 0 5%;">
-    <el-col :span="20">
+    <el-col :span="14">
       <h1 style="color: #337ecc;">
         Todo Manager
       </h1>
     </el-col>
-    <el-row :span="4">
+    <el-col :span="10" style="text-align: right;">
       <el-button type="primary" size="large" round @click="isCreateTodo = true">Create Todo</el-button>
-    </el-row>
+    </el-col>
   </el-row>
   <CreateTodo v-if="isCreateTodo" @add-todo="(todo) => addTodo(todo)" @close="isCreateTodo = false" />
   <ToDoCard v-for="todo in todoList" :todo="todo" @delete-todo="(todo) => deleteTodo(todo)"

@@ -1,7 +1,7 @@
 <template>
     <div style="margin: 10px 20px">
 
-        <el-dialog :model-value="true" title="Create Todo" width="50%" @closed="close">
+        <el-dialog :model-value="true" title="Create Todo" :width="dialogWidth" @closed="close">
             <div>
                 <h3>Title<span style="color: red;">*</span></h3>
                 <el-input v-model="title" placeholder="Title" />
@@ -23,13 +23,16 @@
     
 <script setup lang="ts">
 import { ElMessage } from 'element-plus';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 
 const emits = defineEmits(['add-todo', 'close']);
 
+
 const title = ref('');
 const description = ref('');
-
+const dialogWidth = computed(() => {
+    return window.innerWidth < 500 ? "90%" : "50%"
+})
 const addTodo = () => {
     if (title.value === "") {
         ElMessage.error("Title can not be blank.");
