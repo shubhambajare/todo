@@ -12,6 +12,7 @@
   <CreateTodo v-if="isCreateTodo" @add-todo="(todo) => addTodo(todo)" @close="isCreateTodo = false" />
   <ToDoCard v-for="todo in todoList" :todo="todo" @delete-todo="(todo) => deleteTodo(todo)"
     @toggle-imp="(title) => toggleImp(title)" />
+  <p style="text-align: right; color: gray">Created using Vue3 + Typescript + Element Plus</p>
 </template>
 
 <script setup lang="ts">
