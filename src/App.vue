@@ -16,21 +16,19 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import ToDoCard from './components/ToDoCard.vue';
 import CreateTodo from './components/CreateTodo.vue';
 
+onMounted(() => {
+  getListFromLocalStorage();
+})
+
 const todoList = ref([
   {
-    title: "Todo 1",
-    description: "Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
+    title: "",
+    description: "",
     isImp: false
-  },
-  {
-    title: "Todo 2",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
-    isImp: true
-
   }
 ]);
 
@@ -38,11 +36,13 @@ const isCreateTodo = ref(false)
 
 const deleteTodo = (todo: { title: string, description: string }) => {
   todoList.value = todoList.value.filter(data => todo.title != data.title)
+  updateInLocalStorage();
 }
 
 const addTodo = (todo: { title: string, description: string, isImp: false }) => {
   todoList.value.push(todo)
   isCreateTodo.value = false
+  updateInLocalStorage();
 }
 
 const toggleImp = (title: string) => {
@@ -52,6 +52,15 @@ const toggleImp = (title: string) => {
     }
     return todo;
   })
+  updateInLocalStorage();
+}
+
+const updateInLocalStorage = () => {
+  localStorage.setItem("todoList", JSON.stringify(todoList.value));
+}
+
+const getListFromLocalStorage = () => {
+  todoList.value = JSON.parse(localStorage.getItem("todoList") || "[]")
 }
 
 </script>
