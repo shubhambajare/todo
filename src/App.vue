@@ -12,6 +12,14 @@
   <CreateTodo v-if="isCreateTodo" @add-todo="(todo) => addTodo(todo)" @close="isCreateTodo = false" />
   <ToDoCard v-for="todo in todoList" :todo="todo" @delete-todo="(todo) => deleteTodo(todo)"
     @toggle-imp="(title) => toggleImp(title)" />
+
+  <p v-if="todoList.length === 0" style="text-align: center; color: gray;">List is empty. Click on create button to
+    create new TODO
+    <br />
+    <br />
+    <el-button type="primary" size="large" round @click="isCreateTodo = true">Create Todo</el-button>
+
+  </p>
   <p style="text-align: right; color: gray">Created using Vue3 + Typescript + Element Plus</p>
 </template>
 
